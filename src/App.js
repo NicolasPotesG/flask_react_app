@@ -18,7 +18,7 @@ function App() {
   function addEvento(nombre, categoria, lugar, direccion, fechaInicio, fechaFinal, virtual) {
     if (isAuthenticated && userId != 0) {
       getAccessTokenSilently().then((token) => {
-        axios.post("http://172.24.41.253:5000/api/eventos/" + userId, {
+        axios.post("http://127.0.0.1:5000/api/eventos/" + userId, {
           nombre: nombre,
           categoria: categoria,
           lugar: lugar,
@@ -56,7 +56,7 @@ function App() {
 
   function deleteEvento(idE) {
     getAccessTokenSilently().then((token) => {
-      axios.delete("http://172.24.41.253:5000/api/eventos/" + idE, {
+      axios.delete("http://127.0.0.1:5000/api/eventos/" + idE, {
         headers: {
           authorization: `Bearer ${token}`
         }
@@ -74,7 +74,7 @@ function App() {
 
   function updateEvento(idE, nombre, categoria, lugar, direccion, fechaInicio, fechaFinal, virtual, fechaCreacion) {
     getAccessTokenSilently().then((token) => {
-      axios.put("http://172.24.41.253:5000/api/eventos/" + userId + "/" + idE,
+      axios.put("http://127.0.0.1:5000/api/eventos/" + userId + "/" + idE,
         {
           nombre: nombre,
           categoria: categoria,
@@ -113,13 +113,13 @@ function App() {
 
   if (isAuthenticated) {
     getAccessTokenSilently().then((token) => {
-      axios.get("http://172.24.41.253:5000/api/usuarios/" + user.email, {
+      axios.get("http://127.0.0.1:5000/api/usuarios/" + user.email, {
         headers: {
           authorization: `Bearer ${token}`
         }
       }).then((respEmail) => {
         if (respEmail.data == "No existe ese usuario.") {
-          axios.post("http://172.24.41.253:5000/api/usuarios", {
+          axios.post("http://127.0.0.1:5000/api/usuarios", {
             email: user.email,
           }, {
             headers: {
@@ -128,7 +128,7 @@ function App() {
           }
           )
             .then(function (response) {
-              axios.get("http://172.24.41.253:5000/api/usuarios/" + user.email, {
+              axios.get("http://127.0.0.1:5000/api/usuarios/" + user.email, {
                 headers: {
                   authorization: `Bearer ${token}`
                 }
@@ -137,7 +137,7 @@ function App() {
               })
             });
         } else {
-          axios.get("http://172.24.41.253:5000/api/usuarios/" + user.email, {
+          axios.get("http://127.0.0.1:5000/api/usuarios/" + user.email, {
             headers: {
               authorization: `Bearer ${token}`
             }
@@ -146,7 +146,7 @@ function App() {
             if (userId != 0) {
               if (entra == false) {
                 setEntra(true);
-                axios.get("http://172.24.41.253:5000/api/eventos/" + userId, {
+                axios.get("http://127.0.0.1:5000/api/eventos/" + userId, {
                   headers: {
                     authorization: `Bearer ${token}`
                   }
