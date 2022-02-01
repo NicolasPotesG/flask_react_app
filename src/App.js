@@ -113,6 +113,7 @@ function App() {
 
   if (isAuthenticated) {
     getAccessTokenSilently().then((token) => {
+      console.log(token);
       axios.get("/api/usuarios/" + user.email, {
         headers: {
           authorization: `Bearer ${token}`
