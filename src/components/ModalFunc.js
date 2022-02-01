@@ -11,7 +11,7 @@ const ModalFunc = (props) => {
     const handleClose = () => setShow(false);
 
     const [nombre, setNombre] = useState("");
-    const [categoria, setCategoria] = useState("");
+    const [categoria, setCategoria] = useState("Conferencia");
     const [lugar, setLugar] = useState("");
     const [direccion, setDireccion] = useState("");
     const [fechaInicio, setFechaInicio] = useState("");

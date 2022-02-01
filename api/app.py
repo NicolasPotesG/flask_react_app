@@ -1,10 +1,8 @@
 from datetime import datetime
-import email
 import json
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 from functools import wraps
-from wsgiref import headers
-from flask import Flask, request, jsonify, _request_ctx_stack,  _app_ctx_stack
+from flask import Flask, request,  _app_ctx_stack
 from flask_cors import cross_origin
 from jose import jwt
 from flask_sqlalchemy import SQLAlchemy

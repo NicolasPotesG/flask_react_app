@@ -12,7 +12,7 @@ function App() {
 
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
   const [eventList, setEventList] = useState([]);
-  let userId = 0;
+  const [userId, setUserId] = useState(0);
   const [entra, setEntra] = useState(false);
 
   function addEvento(nombre, categoria, lugar, direccion, fechaInicio, fechaFinal, virtual) {
@@ -47,6 +47,8 @@ function App() {
               virtual: virtual
             });
             setEventList(newEvents);
+          }).catch((error) => {
+            alert("Revise bien los campos del evento y asegúrese que todos están completos. Adicionalmente, recuerde que no pueden existir dos eventos con el mismo nombre.");
           });
       });
     }
@@ -88,7 +90,6 @@ function App() {
           }
         }
       ).then((response) => {
-        console.log(response);
         let newEvents = [...eventList];
         for (var i = 0; i < newEvents.length; i++) {
           if (newEvents[i].id == idE) {
@@ -118,7 +119,6 @@ function App() {
         }
       }).then((respEmail) => {
         if (respEmail.data == "No existe ese usuario.") {
-          console.log("REGISTRAR");
           axios.post("http://172.24.41.253:8080/api/usuarios", {
             email: user.email,
           }, {
@@ -128,14 +128,12 @@ function App() {
           }
           )
             .then(function (response) {
-              console.log(response);
               axios.get("http://172.24.41.253:8080/api/usuarios/" + user.email, {
                 headers: {
                   authorization: `Bearer ${token}`
                 }
               }).then((respUId) => {
-                console.log(respUId);
-                userId = respUId.data['id'];
+                setUserId(respUId.data['id']);
               })
             });
         } else {
@@ -144,7 +142,7 @@ function App() {
               authorization: `Bearer ${token}`
             }
           }).then((response) => {
-            userId = response.data['id'];
+            setUserId(response.data['id']);
             if (userId != 0) {
               if (entra == false) {
                 setEntra(true);
